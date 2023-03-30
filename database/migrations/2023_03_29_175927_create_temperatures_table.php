@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('temperature', function (Blueprint $table) {
     $table->id();
     $table->unsignedBigInteger('people_id');
+    // onDelete('cascade')は、外部キーの参照先のpeopleテーブルのidのレコードが削除された場合に、このレコードも一緒に削除されるようにする
     $table->foreign('people_id')->references('id')->on('people')->onDelete('cascade');
     // 他のカラムの定義　合計3桁で小数1桁の体温を表すカラム↓
     $table->decimal('temperature', 3, 1);

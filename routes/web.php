@@ -48,9 +48,11 @@ Route::post('/photos/create', [PhotoController::class, 'upload'])->name('photos.
 // Route::resource('temperature', TemperatureController::class);
 // Route::post('people/'.$person->id.'/edit', [TemperatureController::class,'post'])->name('temperature.post');
 Route::post('people/{id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
+Route::get('people/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
 
 
 Route::get('people/{id}/edit', [PersonController::class, 'edit'])->name('people.edit');
+
 // Route::post('people', [TemperatureController::class,'post'])->name('temperature.post');
 // Route::post('people/{id}/edit', 'TemperatureController@post')->name('temperature.post');
 // Route::get('people/{id}/edit', [TemperatureController::class, 'edit'])->name('people.edit');
