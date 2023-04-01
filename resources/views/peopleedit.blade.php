@@ -73,7 +73,7 @@
       
                         @csrf
                         {{$person->person_name}}さんのID番号
-                        <input name="people_id" id="text-box" value="{{$person->id}}" class="appearance-none block w-full text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="">
+                        <input name="people_id" value="{{$person->id}}" class="appearance-none block w-full text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="">
                         <input type="hidden" name="id" value="{{ $person->id }}">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1">
                         体温
@@ -127,46 +127,35 @@
               <canvas ref="canvas" width="640" height="480"></canvas>
     </div>
     <!--右側エリア[[END]--> 
-
 </div>
  <!--全エリア[END]-->
  <script>
-
 async function main() {
   try {
     const video = document.querySelector("#camera-stream");
     const button = document.querySelector("#button");
     const image = document.querySelector("#image");
  　 let dataUrl = "";
-
     const stream = await navigator.mediaDevices.getUserMedia({
       video: {
         facingMode: "user",
       },
       audio: false,
     });
-
     video.srcObject = stream;
-
     const [track] = stream.getVideoTracks();
     const settings = track.getSettings();
     const { width, height } = settings;
-
 const base64_image = document.getElementById("base64_image");
-
    button.addEventListener("click", async (event) => {
   const canvas = document.createElement("canvas");
   canvas.setAttribute("width", width);
   canvas.setAttribute("height", height);
-
   const context = canvas.getContext("2d");
   context.drawImage(video, 0, 0, width, height);
-
-
 // Webカメラで撮った画像をURLに変換
   dataUrl = canvas.toDataURL("image/jpeg");
     image.src = dataUrl;
-
   console.log(dataUrl); // 追加
  image.onload = async () => {
       if (!dataUrl) {
@@ -181,14 +170,7 @@ const base64_image = document.getElementById("base64_image");
     console.error(err);
   }
 }
-
-
-
-
-
 // 福島先生コード↑
-
-
 // HTMLのフォームでユーザーがアップロードした画像のBase64エンコードされたデータを取得
 // Google Cloud Vision APIの「TEXT_DETECTION」機能を使用するためのリクエストデータを作成します。
 async function recognizeText(dataUrl) {
@@ -222,6 +204,14 @@ const response = await fetch(
 }
 main();
 // recognizeText();
+
+const textBox = document.getElementById('text-box');
+textBox.addEventListener('input', function() {
+  const value = textBox.value;
+  if (!/^\d+(\.\d)?$/.test(value)) {
+    alert('小数点以下1桁までの合計3桁の数字を登録してください');
+  }
+});
 
 </script>
 </x-app-layout>
