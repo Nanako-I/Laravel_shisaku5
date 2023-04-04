@@ -27,7 +27,11 @@ Route::get('/dashboard', function () {
 
 // Book用の一括ルーティング
 Route::resource('people', PersonController::class);
-  
+// Route::resource('peopleregister',  PersonController::class);
+
+Route::get('peopleregister', [PersonController::class, 'create']);
+Route::post('peopleregister', [PersonController::class, 'store']);
+// Route::get('peopleregister', [PersonController::class, 'create']); 
 //   Route::resource('/photos', 'App\Http\Controllers\PhotoController')->only(['create','store']);
 
 Route::middleware('auth')->group(function () {
@@ -43,13 +47,21 @@ Route::post('/photos/create', [PhotoController::class, 'upload'])->name('photos.
 
 
 
-// Route::resource('people/{id}/edit', TemperatureController::class);
-// Route::post('people/{id}/edit', [TemperatureController::class, 'post'])->name('temperature.post');
-// Route::resource('temperature', TemperatureController::class);
-// Route::post('people/'.$person->id.'/edit', [TemperatureController::class,'post'])->name('temperature.post');
-Route::post('people/{id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
-Route::get('people/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
+// 変更前↓
+// Route::post('people/{id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
+// Route::get('people/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
 
+// Route::post('temperature/{id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
+// Route::get('temperature/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
+// Route::resource('temperature', TemperatureController::class);
+// Route::resource('temperature', TemperatureController::class)->parameters(['temperature' => 'temperature'])->except(['show']);
+
+Route::get('temperature/{people_id}/edit', [TemperatureController::class, 'edit'])->name('temperature.edit');
+// Route::resource('temperature/{people_id}/edit', [TemperatureController::class])->name('temperature.edit');
+// Route::resource('temperature/{people_id}/edit', TemperatureController::class);
+
+Route::post('temperature/{people_id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
+// Route::get('people/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
 
 Route::get('people/{id}/edit', [PersonController::class, 'edit'])->name('people.edit');
 

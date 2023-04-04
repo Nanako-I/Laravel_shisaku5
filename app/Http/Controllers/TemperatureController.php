@@ -35,10 +35,11 @@ class TemperatureController extends Controller
      */
      
      
-    public function create()
-    {
-        //
-    }
+   public function create($id)
+{
+    $person = Temperature::findOrFail($request->people_id);
+return redirect()->route('temperatureedit', ['people_id' => $person->id]);
+}
 
     /**
      * Store a newly created resource in storage.
@@ -67,7 +68,7 @@ class TemperatureController extends Controller
     ]);
     // return redirect('people/{id}/edit');
    $person = Person::findOrFail($request->people_id);
-    return redirect()->route('people.edit', ['id' => $person->id]);
+    return redirect()->route('temperature.edit', ['people_id' => $person->id]);
     }
 
     /**
@@ -87,10 +88,16 @@ class TemperatureController extends Controller
      * @param  \App\Models\temperature  $temperature
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+//     public function edit($id)
+// {
+//     $person = Person::findOrFail($request->people_id);
+//     return view('temperature.edit', ['id' => $person->id],compact('person'));
+// }
+
+public function edit(Request $request, $id)
 {
-    $person = Person::find($id);
-    return view('peopleedit', compact('person'));
+    $person = Temperature::findOrFail($id);
+    return view('temperatureedit', ['id' => $person->id],compact('person'));
 }
 
     /**

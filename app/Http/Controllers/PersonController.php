@@ -46,9 +46,9 @@ class PersonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
+{
+    return view('peopleregister');
+}
 
     /**
      * Store a newly created resource in storage.
@@ -79,6 +79,7 @@ class PersonController extends Controller
     
     ]);
     return redirect('people');
+    // return view('peopleregister');
 
         // $people = Person::create($storeData);
         // // トップページに返す↓
@@ -94,7 +95,7 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        //
+    return view('temperature.'.$person->id.'.edit');//
     }
 
     /**

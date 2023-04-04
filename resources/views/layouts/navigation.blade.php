@@ -13,7 +13,19 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('ダッシュボード') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                     <x-nav-link :href="url('people')" :active="request()->is('people')">
+                        {{ __('利用者一覧') }}
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                     <x-nav-link :href="url('peopleregister')" :active="request()->is('peopleregister')">
+                        {{ __('新規登録') }}
                     </x-nav-link>
                 </div>
             </div>
