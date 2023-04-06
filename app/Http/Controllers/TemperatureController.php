@@ -57,7 +57,7 @@ return redirect()->route('temperatureedit', ['people_id' => $person->id]);
 
          $storeData = $request->validate([
             'temperature' => 'required|max:255',
-            'people_id' => 'required|exists:people,id',
+            // 'people_id' => 'required|exists:people,id',
         ]);
         // バリデーションした内容を保存する↓
         

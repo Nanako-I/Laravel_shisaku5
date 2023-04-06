@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PersonController;//追記
 use App\Http\Controllers\PhotoController;//追記
 use App\Http\Controllers\TemperatureController;
+use App\Http\Controllers\FoodController;
+use App\Http\Controllers\ToiletController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,11 +48,6 @@ Route::post('/photos/create', [PhotoController::class, 'upload'])->name('photos.
 // postはこちら側が情報を投げる　getは情報をとってくる
 
 
-
-// 変更前↓
-// Route::post('people/{id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
-// Route::get('people/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
-
 // Route::post('temperature/{id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
 // Route::get('temperature/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
 // Route::resource('temperature', TemperatureController::class);
@@ -61,6 +58,12 @@ Route::get('temperature/{people_id}/edit', [TemperatureController::class, 'edit'
 // Route::resource('temperature/{people_id}/edit', TemperatureController::class);
 
 Route::post('temperature/{people_id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
+
+Route::get('food/{people_id}/edit', [FoodController::class, 'edit'])->name('food.edit');
+Route::post('food/{people_id}/edit', [FoodController::class,'store'])->name('food.post');
+
+Route::get('toilet/{people_id}/edit', [ToiletController::class, 'edit'])->name('toilet.edit');
+Route::post('toilet/{people_id}/edit', [ToiletController::class,'store'])->name('toilet.post');
 // Route::get('people/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
 
 Route::get('people/{id}/edit', [PersonController::class, 'edit'])->name('people.edit');
