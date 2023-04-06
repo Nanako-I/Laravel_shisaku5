@@ -27,11 +27,50 @@
                             
                             <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-                                <span class="text-gray-400 text-6xl">
-                                     <i class="material-icons md-48">rice_bowl</i>
-                                </span>
+                                
                             
         </form>
+       <p>ご飯・パン（主食）</p>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'rice_bowl_icon_1')">
+              <i class="material-icons md-48" id="rice_bowl_icon_1">rice_bowl</i>
+            </span>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'rice_bowl_icon_2')">
+              <i class="material-icons md-48" id="rice_bowl_icon_2">rice_bowl</i>
+            </span>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'rice_bowl_icon_3')">
+              <i class="material-icons md-48" id="rice_bowl_icon_3">rice_bowl</i>
+            </span>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'rice_bowl_icon_4')">
+              <i class="material-icons md-48" id="rice_bowl_icon_4">rice_bowl</i>
+            </span>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'rice_bowl_icon_5')">
+              <i class="material-icons md-48" id="rice_bowl_icon_5">rice_bowl</i>
+            </span>
+            
+            <!--<p id="rice_status"></p>-->
+            <input type="text" id="staple_food" class="w-300 h-10px flex-shrink-0 break-words">
+
+
+ <p>おかず（副食）</p>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'set_meal_1')">
+              <i class="material-icons md-48" id="set_meal_1">set_meal</i>
+            </span>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'set_meal_2')">
+              <i class="material-icons md-48" id="set_meal_2">set_meal</i>
+            </span>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'set_meal_3')">
+              <i class="material-icons md-48" id="set_meal_3">set_meal</i>
+            </span>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'set_meal_4')">
+              <i class="material-icons md-48" id="set_meal_4">set_meal</i>
+            </span>
+            <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'set_meal_5')">
+              <i class="material-icons md-48" id="set_meal_5">set_meal</i>
+            </span>
+            
+            <!--<p id="rice_status"></p>-->
+            <input type="text" id="side_dish" class="w-300 h-10px flex-shrink-0 break-words">
+            <!--<span class="material-icons">set_meal</span>-->
     <!--右側エリア[START]-->
             <div class="flex-1 text-gray-700 text-left bg-blue-100 px-4 py-2 m-2">
          <!-- 現在の本 -->
@@ -55,7 +94,7 @@
                     </div>
         
                   </style>
-              
+
               <!--福島先生コード-->
               <!--<form action="storage.php" method="post">-->
                  <input type="hidden" id="base64_image" name="base64_image" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" value="" />
@@ -77,6 +116,82 @@
 </div>
  <!--全エリア[END]-->
  <script>
+
+   let count = 0;
+  const rice_bowl_icon_1 = document.getElementById("rice_bowl_icon_1");
+rice_bowl_icon_1.addEventListener("click", () => {
+  count++;
+  rice_bowl_icon_1.classList.remove("text-gray-400");
+  rice_bowl_icon_1.classList.add("text-black");
+  updateStatus();
+});
+
+const rice_bowl_icon_2 = document.getElementById("rice_bowl_icon_2");
+rice_bowl_icon_2.addEventListener("click", () => {
+  count++;
+  rice_bowl_icon_2.classList.remove("text-gray-400");
+  rice_bowl_icon_2.classList.add("text-black");
+  updateStatus();
+});
+
+const rice_bowl_icon_3 = document.getElementById("rice_bowl_icon_3");
+rice_bowl_icon_3.addEventListener("click", () => {
+  count++;
+  rice_bowl_icon_3.classList.remove("text-gray-400");
+  rice_bowl_icon_3.classList.add("text-black");
+  updateStatus();
+});
+
+const rice_bowl_icon_4 = document.getElementById("rice_bowl_icon_4");
+rice_bowl_icon_4.addEventListener("click", () => {
+  count++;
+  rice_bowl_icon_4.classList.remove("text-gray-400");
+  rice_bowl_icon_4.classList.add("text-black");
+  updateStatus();
+});
+
+const rice_bowl_icon_5 = document.getElementById("rice_bowl_icon_5");
+rice_bowl_icon_5.addEventListener("click", () => {
+  count++;
+  rice_bowl_icon_5.classList.remove("text-gray-400");
+  rice_bowl_icon_5.classList.add("text-black");
+  updateStatus();
+});
+
+
+  function updateStatus() {
+const status = document.getElementById("staple_food");
+switch (count) {
+case 1:
+status.value = "5分の1";
+console.log("ステータス文字列： 5分の1")
+break;
+case 2:
+status.value = "5分の2";
+console.log("ステータス文字列： 5分の2");
+break;
+case 3:
+status.value = "半分";
+console.log("ステータス文字列： 5分の3");
+break;
+case 4:
+status.value = "5分の4";
+console.log("ステータス文字列： 5分の4");
+break;
+case 5:
+status.value = "完食";
+console.log("ステータス文字列： 完食");
+break;
+default:
+status.value = "";
+ console.log("ステータス文字列： ");
+break;
+}
+}
+
+
+  
+
 async function main() {
   try {
     const video = document.querySelector("#camera-stream");
