@@ -20,7 +20,7 @@ use App\Http\Controllers\RecordController;
 |
 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -49,8 +49,6 @@ Route::post('/photos/create', [PhotoController::class, 'upload'])->name('photos.
 // postはこちら側が情報を投げる　getは情報をとってくる
 
 
-// Route::post('temperature/{id}/edit', [TemperatureController::class,'store'])->name('temperature.post');
-// Route::get('temperature/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
 // Route::resource('temperature', TemperatureController::class);
 // Route::resource('temperature', TemperatureController::class)->parameters(['temperature' => 'temperature'])->except(['show']);
 
@@ -72,13 +70,6 @@ Route::get('record/{id}/edit', [RecordController::class, 'show'])->name('record.
 
 Route::get('people/{id}/edit', [PersonController::class, 'edit'])->name('people.edit');
 
-
-
-
-// Route::post('people', [TemperatureController::class,'post'])->name('temperature.post');
-// Route::post('people/{id}/edit', 'TemperatureController@post')->name('temperature.post');
-// Route::get('people/{id}/edit', [TemperatureController::class, 'edit'])->name('people.edit');
-// Route::post('peopleedit', [TemperatureController::class, 'store'])->name('peopleedit.create');
 
 // Route::get('/photo/upload', PhotoController::class, 'uploadForm')->name('photo.upload.form');
 
