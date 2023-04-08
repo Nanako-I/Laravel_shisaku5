@@ -13,14 +13,46 @@
        
 <form action="{{ url('toilet/'.$person->id.'/edit') }}" method="POST">
          
-      
+       <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
                         @csrf
                         
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1">
-                        トイレのきろく
-                        </label>
-                        <input name="urine_one" id="text-box" class="appearance-none block w-full text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="">
+                    
                        
+                        <p>尿</p>
+            　           <span class="text-gray-400 text-100xl" onclick="changeColor(this, 'urine_one')">
+                          <i class="material-icons md-480" id="urine_one">check_box</i>
+                        </span>
+                        <input name="urine_one" type="text" id="urine_one_input" class="w-300 h-10px flex-shrink-0 break-words">
+                        
+                         <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'urine_two')">
+                          <i class="material-icons md-48" id="urine_two">check_box</i>
+                        </span>
+                        <input name="urine_two" type="text" id="urine_two_input" class="w-300 h-10px flex-shrink-0 break-words">
+                        
+                        <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'urine_three')">
+                          <i class="material-icons md-48" id="urine_three">check_box</i>
+                        </span>
+                        <input name="urine_three" type="text" id="urine_three_input" class="w-300 h-10px flex-shrink-0 break-words">
+                        
+                        
+                         <p>便</p>
+            　           <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'ben_one')">
+                          <i class="material-icons md-48" id="ben_one">check_box</i>
+                        </span>
+                        <input name="ben_one" type="text" id="ben_one_input" class="w-300 h-10px flex-shrink-0 break-words">
+                        
+                        
+                         <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'ben_two')">
+                          <i class="material-icons md-48" id="ben_two">check_box</i>
+                        </span>
+                        <input name="ben_two" type="text" id="ben_two_input" class="w-300 h-10px flex-shrink-0 break-words">
+                        
+                         <span class="text-gray-400 text-6xl" onclick="changeColor(this, 'ben_three')">
+                          <i class="material-icons md-48" id="ben_three_input">check_box</i>
+                        </span>
+                        <input name="ben_three" type="text" id="ben_three" class="w-300 h-10px flex-shrink-0 break-words">
+            
                             <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
                                 送信
                             </button>
@@ -29,129 +61,37 @@
     <!--右側エリア[START]-->
             <div class="flex-1 text-gray-700 text-left bg-blue-100 px-4 py-2 m-2">
          <!-- 現在の本 -->
-         <div>
-                          <video autoplay muted playsinline id="video"></video>
-                      </div>
-    
-             　 <button type="button" button id="button" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">写真を撮る</button>
-                <!--<button type="button" button id="take-photo" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" @click="capture">キャプチャ</button>-->
-                 
-            </div>  
-                <div>
-                   <img id="image" alt="" />
-                </div>
-            <!--カメラが映っている部分が表示されている箇所↓-->
-            <div class="flex">
-                 <style>
-                    <div class="relative h-screen">
-                      <video id="camera-stream" class="absolute inset-0 w-full h-full object-cover"></video>
-                       <div id="camera-range" class="absolute inset-10 w-80 h-80 border-2 border-red-500"></div>
-                    </div>
-        
-                  </style>
-              
-              <!--福島先生コード-->
-              <!--<form action="storage.php" method="post">-->
-                 <input type="hidden" id="base64_image" name="base64_image" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" value="" />
-                  <!--<button type="button" button id="" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">画像保存</button>-->
-              </form>
-    
-                    <div id="video-container">
-                        
-                            <video id="camera-stream" autoplay></video>
-                            <div id="camera-range"></div>
-                    </div>
-    　　　　     <!--<input type="text" id="text-box" class="w-300 h-10">-->
-　　　　　　
-        </div>
-          <div v-show="isModeImage">
-              <canvas ref="canvas" width="640" height="480"></canvas>
-    </div>
+         
     <!--右側エリア[[END]--> 
 </div>
  <!--全エリア[END]-->
  <script>
-async function main() {
-  try {
-    const video = document.querySelector("#camera-stream");
-    const button = document.querySelector("#button");
-    const image = document.querySelector("#image");
- 　 let dataUrl = "";
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: {
-        facingMode: "user",
-      },
-      audio: false,
-    });
-    video.srcObject = stream;
-    const [track] = stream.getVideoTracks();
-    const settings = track.getSettings();
-    const { width, height } = settings;
-const base64_image = document.getElementById("base64_image");
-   button.addEventListener("click", async (event) => {
-  const canvas = document.createElement("canvas");
-  canvas.setAttribute("width", width);
-  canvas.setAttribute("height", height);
-  const context = canvas.getContext("2d");
-  context.drawImage(video, 0, 0, width, height);
-// Webカメラで撮った画像をURLに変換
-  dataUrl = canvas.toDataURL("image/jpeg");
-    image.src = dataUrl;
-  console.log(dataUrl); // 追加
- image.onload = async () => {
-      if (!dataUrl) {
-        console.log("dataUrl is undefined");
-        return;
-      }
-       // recognizeText関数が呼び出され、テキスト認識を実行
-      await recognizeText(dataUrl);
-};
-    });
-  } catch (err) {
-    console.error(err);
-  }
-}
-// 福島先生コード↑
-// HTMLのフォームでユーザーがアップロードした画像のBase64エンコードされたデータを取得
-// Google Cloud Vision APIの「TEXT_DETECTION」機能を使用するためのリクエストデータを作成します。
-async function recognizeText(dataUrl) {
-  if (!dataUrl) return; // 追加
-  const base64Data = dataUrl.split(",")[1];
-  const requestData = {
-    requests: [
-      {
-        image: {
-          content: base64Data,
-        },
-        features: [{ type: "TEXT_DETECTION" }],
-      },
-    ],
-  };
-const apiKey = "{{ config('app.api_key') }}";
-const response = await fetch(
- "https://vision.googleapis.com/v1/images:annotate?key=" + apiKey,
-  {
-    method: "POST",
-    body: JSON.stringify(requestData),
-  }
-);
-  
-//   応答データからテキストを抽出し、コンソールに出力
- const data = await response.json();
-  const text = data.responses[0].fullTextAnnotation.text;
-  console.log(text);
-  //   テキストボックスにコンソールに表示された文字を入れる
-  document.getElementById("text-box").value = text;
-}
-main();
-// recognizeText();
+ 
+ const urineOneIcon = document.querySelector('#urine_one');
 
-const textBox = document.getElementById('text-box');
-textBox.addEventListener('input', function() {
-  const value = textBox.value;
-  if (!/^\d+(\.\d)?$/.test(value)) {
-    alert('小数点以下1桁までの合計3桁の数字を登録してください');
-  }
+// add a click event listener to the icon
+urineOneIcon.addEventListener('click', () => {
+  // update the input value
+  const urineOneInput = document.querySelector('#urine_one_input');
+  urineOneInput.value = 'トイレ';
+
+  // change the icon color
+  //urineOneIcon.classList.replace('text-gray-400', 'text-yellow-400');
+  urineOneIcon.classList.remove('text-gray-400');
+  urineOneIcon.classList.add('text-yellow-400');
+});
+
+
+ const benTwoIcon = document.querySelector('#ben_two');
+
+// add a click event listener to the icon
+benTwoIcon.addEventListener('click', () => {
+  // update the input value
+  const benTwoInput = document.querySelector('#ben_two_input');
+  benTwoInput.value = 'おむつ';
+
+  // change the icon color
+  benTwoIcon.classList.replace('text-gray-400', 'text-yellow-400');
 });
 
 </script>

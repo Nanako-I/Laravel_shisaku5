@@ -38,7 +38,7 @@ class TemperatureController extends Controller
    public function create($id)
 {
     $person = Temperature::findOrFail($request->people_id);
-return redirect()->route('temperatureedit', ['people_id' => $person->id]);
+return redirect()->route('temperature.edit', ['people_id' => $person->id]);
 }
 
     /**

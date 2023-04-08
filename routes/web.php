@@ -8,6 +8,7 @@ use App\Http\Controllers\PhotoController;//追記
 use App\Http\Controllers\TemperatureController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ToiletController;
+use App\Http\Controllers\RecordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,7 +67,13 @@ Route::get('toilet/{people_id}/edit', [ToiletController::class, 'edit'])->name('
 Route::post('toilet/{people_id}/edit', [ToiletController::class,'store'])->name('toilet.post');
 // Route::get('people/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
 
+Route::get('record/{id}/edit', [RecordController::class, 'show'])->name('record.edit');
+
+
 Route::get('people/{id}/edit', [PersonController::class, 'edit'])->name('people.edit');
+
+
+
 
 // Route::post('people', [TemperatureController::class,'post'])->name('temperature.post');
 // Route::post('people/{id}/edit', 'TemperatureController@post')->name('temperature.post');

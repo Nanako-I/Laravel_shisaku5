@@ -89,19 +89,19 @@
         
         <hr>
         <h5>
-            読み取った文字を上のフォームに当てはめてください。<br>
-          <div id="modal" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10 hidden">
-  <div id="option-list" class="bg-white p-4 rounded-md shadow-md">
-    <div id="person-name-option" class="px-4 py-2 cursor-pointer hover:bg-gray-100">名前</div>
-    <div id="date-of-birth-option" class="px-4 py-2 cursor-pointer hover:bg-gray-100">生年月日</div>
-    <div id="gender-option" class="px-4 py-2 cursor-pointer hover:bg-gray-100">性別</div>
-    <div id="disability-name-option" class="px-4 py-2 cursor-pointer hover:bg-gray-100">障がい名</div>
-  </div>
-  <div id="modal-btn-list" class="mt-4">
-    <button class="modal-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">選択</button>
-    <button class="modal-btn bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">キャンセル</button>
-    <button id="modal-trigger" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">選択するフォームを選んでください</button>
-  </div>
+            読み取った文字を上のフォームに当てはめてください。<br></h5>
+        <div id="modal" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-10 hidden">
+            <div id="option-list" class="bg-white p-4 rounded-md shadow-md">
+            <div id="person-name-option" class="px-4 py-2 cursor-pointer hover:bg-gray-100">名前</div>
+            <div id="date-of-birth-option" class="px-4 py-2 cursor-pointer hover:bg-gray-100">生年月日</div>
+            <div id="gender-option" class="px-4 py-2 cursor-pointer hover:bg-gray-100">性別</div>
+            <div id="disability-name-option" class="px-4 py-2 cursor-pointer hover:bg-gray-100">障がい名</div>
+        </div>
+        <div id="modal-btn-list" class="mt-4">
+            <button class="modal-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">選択</button>
+            <button class="modal-btn bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">キャンセル</button>
+            <button id="modal-trigger" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">選択するフォームを選んでください</button>
+        </div>
 </div>
 
 <!-- <div id="modal" class="modal hidden fixed z-50 inset-0 overflow-auto bg-black bg-opacity-40">-->
@@ -142,7 +142,7 @@
 <!--  </div>-->
 <!--</div>-->
 
-        </h5>
+        
         
         <div v-show="isModeVideo">
             <div class="float-right">
@@ -351,61 +351,60 @@ const response = await fetch(
   //   テキストボックスにコンソールに表示された文字を入れる
   document.getElementById("text-box").value = text;
 }
-const textBox = document.getElementById("text-box");
-const modal = document.getElementById("modal");
-const modalText = document.getElementById("modal-text");
 
+
+const textBox = document.getElementById("text-box");
+
+function setTextToInput(string1,string2){
+    var inputtext = document.getElementsByName(string1);
+    
+    inputtext[0].value = string2;
+};
 // モーダルの表示
-function showModal() {
+function showModal(selectedText) {
+  const modal = document.getElementById("modal");
   const personNameOption = document.getElementById("person-name-option");
   const dateOfBirthOption = document.getElementById("date-of-birth-option");
   const genderOption = document.getElementById("gender-option");
   const disabilityNameOption = document.getElementById("disability-name-option");
 
-  // 選択されたテキストを取得する
-  const selectedText = window.getSelection().toString();
-  // テキストが選択されている場合、モーダルに表示する
-  if (selectedText) {
-    modalText.textContent = `以下のテキストをどのフォームに挿入しますか？\n\n"${selectedText}"`;
-    modal.style.display = "block";
-  }
-  
   personNameOption.addEventListener("click", () => {
     const personNameInput = document.querySelector('input[name="person_name"]');
-    textBox.value = textBox.value.replace(selectedText, '');
-    setTextToInput('person_name', personNameInput.value + selectedText);
+    //setTextToInput('person_name', personNameInput.value + selectedText
+    setTextToInput('person_name', selectedText);
     modal.style.display = 'none';
   });
   dateOfBirthOption.addEventListener("click", () => {
     const dateOfBirthInput = document.querySelector('input[name="date_of_birth"]');
-    textBox.value = textBox.value.replace(selectedText, '');
-    setTextToInput('date_of_birth', dateOfBirthInput.value + selectedText);
+    //setTextToInput('date_of_birth', dateOfBirthInput.value + selectedText);
+    setTextToInput('date_of_birth', selectedText);
     modal.style.display = 'none';
   });
   genderOption.addEventListener("click", () => {
     const genderInput = document.querySelector('input[name="gender"]');
-    textBox.value = textBox.value.replace(selectedText, '');
-    setTextToInput('gender', genderInput.value + selectedText);
+    //setTextToInput('gender', genderInput.value + selectedText);
+    setTextToInput('gender', selectedText);
     modal.style.display = 'none';
   });
   disabilityNameOption.addEventListener("click", () => {
     const disabilityNameInput = document.querySelector('input[name="disability_name"]');
-    textBox.value = textBox.value.replace(selectedText, '');
-    setTextToInput('disability_name', disabilityNameInput.value + selectedText);
+    //setTextToInput('disability_name', disabilityNameInput.value + selectedText);
+    setTextToInput('disability_name', selectedText);
     modal.style.display = 'none';
   });
+
+  modal.style.display = "block";
 }
 
 const modalTrigger = document.getElementById("modal-trigger");
 modalTrigger.addEventListener("click", showModal);
 
-document.addEventListener("mouseup", () => {
+document.getElementById("text-box").addEventListener("mouseup", () => {
   const selectedText = window.getSelection().toString();
   if (selectedText) {
-    showModal();
+    showModal(selectedText);
   }
 });
-
 
 
 
