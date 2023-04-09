@@ -9,6 +9,6 @@ class Person extends Model
 {
     use HasFactory;
     protected $table = 'people';
-    protected $fillable = ['person_name','date_of_birth' , 'age','gender','profile_image','disability_name'];
+    protected $fillable = ['person_name','date_of_birth' , 'age','gender','profile_image','filename','path'];
     
 }

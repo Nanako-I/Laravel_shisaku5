@@ -43,9 +43,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Route::get('peopleregister', [PersonController::class, 'uploadForm'])->name('photos.create.form');
+// Route::post('peopleregister', [PersonController::class, 'upload'])->name('photos.create');
 
-Route::get('/photos/create', [PhotoController::class, 'uploadForm'])->name('photos.create.form');
-Route::post('/photos/create', [PhotoController::class, 'upload'])->name('photos.create');
+// Route::get('peopleregister', [PhotoController::class, 'uploadForm'])->name('photos.create.form');
+// Route::post('peopleregister', [PhotoController::class, 'upload'])->name('photos.create');
+// 動いてたやつ↑
+
+// Route::get('/photos/create', [PhotoController::class, 'uploadForm'])->name('photos.create.form');
+// Route::post('/photos/create', [PhotoController::class, 'upload'])->name('photos.create');
 // postはこちら側が情報を投げる　getは情報をとってくる
 
 

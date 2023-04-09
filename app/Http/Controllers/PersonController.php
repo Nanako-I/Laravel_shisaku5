@@ -56,36 +56,78 @@ class PersonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
-    public function store(Request $request)
-    {
-         $storeData = $request->validate([
-            //  requireは必須項目　nullableは書かなくてもいい
-            'person_name' => 'required|max:255',
-            // 'person_name' => ['required', 'string', 'max:255'],
-            'date_of_birth' => 'required|max:255',
-            // 'age' => 'required|max:255',
-        ]);
-        // バリデーションした内容を保存する↓
-        // Personモデルにアクセス
-        
-        $people = Person::create([
-      'person_name' => $request->person_name,
-      'date_of_birth' => $request->date_of_birth,
-    //   'age' => $request->age,
-      'gender' => $request->gender,
-    'profile_image' => $request->profile_image,
-    'disability_name' => $request->disability_name,
-    
+//     public function upload(Request $request)
+// {
+// // バリデーション
+// $request->validate([
+//             'filename' => 'required|image|max:2048',
+//             ]);
+// // 保存先ディレクトリ
+//  $directory = 'public/sample';
+
+// // ファイル名をユニークにする
+// $filename = uniqid() . '.' . $request->file('filename')->getClientOriginalExtension();
+
+// // アップロードされたファイル名を取得	// sampleディレクトリに画像を保存
+// $filename = $request->file('filename')->getClientOriginalName();	
+// // ファイルを保存
+// $request->file('filename')->storeAs($directory, $filename);
+// // 保存したファイルのパスを取得
+// $filepath = $directory . '/' . $filename;
+// // リダイレクト
+// return redirect()->route('photos.create.form')->with('success', '画像をアップロードしました。');
+
+//  $image->name = $filename;
+// $image->path = 'storage/' . $dir . '/' . $filename;
+//         // $image->save();
+
+// }
+
+   public function store(Request $request)
+{
+    $storeData = $request->validate([
+        'person_name' => 'required|max:255',
+        'date_of_birth' => 'required|max:255',
+        // 'gender' => 'required|max:255',
+        // 'disability_name' => 'required|max:255',
+        // 'profile_image' => 'image|max:2048',
     ]);
+
+    $directory = 'public/sample';
+    $filename = null;
+    $filepath = null;
+
+    if ($request->hasFile('filename')) {
+        $request->validate([
+            'filename' => 'image|max:2048',
+        ]);
+        $filename = uniqid() . '.' . $request->file('filename')->getClientOriginalExtension();
+         $filename = $request->file('filename')->getClientOriginalName();	
+        $request->file('filename')->storeAs($directory, $filename);
+        $filepath = $directory . '/' . $filename;
+    }
+
+    $people = Person::create([
+        'person_name' => $request->person_name,
+        'date_of_birth' => $request->date_of_birth,
+        'gender' => $request->gender,
+        'disability_name' => $request->disability_name,
+        'filename' => $filename,
+        'path' => $filepath,
+
+    ]);
+
     return redirect('people');
+}
+
+    
     // return view('peopleregister');
 
         // $people = Person::create($storeData);
         // // トップページに返す↓
         // return redirect('/people');
     
-    }
+    
 
     /**
      * Display the specified resource.
@@ -136,34 +178,14 @@ class PersonController extends Controller
         return redirect('/people');
     }
 
-
-// public function uploadForm()
-//     {
-//         return view('photos.create');
-//     }
+public function uploadForm()
+    {
+        // return view('people');変更↓
+       return view('peopleregister');
+    }
     
-// public function upload(Request $request)
-// {
-// // バリデーション
-// $request->validate([
-//             'profile_image' => 'required|image|max:2048',
-//             ]);
+    
 
-// // 保存先ディレクトリ
-//  $directory = 'public/sample';
-
-// // ファイル名をユニークにする
-// $filename = uniqid() . '.' . $request->file('profile_image')->getClientOriginalExtension();
-
-// // ファイルを保存
-// $request->file('profile_image')->storeAs($directory, $filename);
-
-// // 保存したファイルのパスを取得
-// $filepath = $directory . '/' . $filename;
-
-// // リダイレクト
-// return redirect()->route('photos.create.form')->with('success', '画像をアップロードしました。');
-// }
 
 
  public function __invoke()

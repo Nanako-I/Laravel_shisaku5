@@ -26,9 +26,26 @@
             </div>
         @endif
         <!-- バリデーションエラーの表示に使用-->
-    
-    <!--全エリア[START]-->
-    
+      <body class="h-full w-full">
+  <!--画面遷移すぐのモーダル表示-->
+  <!--<div class="absolute z-50 top-0 right-0 bottom-0 left-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="modal-first">-->
+  <!--  <div class="bg-gray rounded-lg w-1/2 h-full px-4 pt-5 pb-4 text-center">-->
+  <!--    <div class="flex justify-end">-->
+  <!--      <button type="button" class="text-gray-500 hover:text-gray-400 focus:outline-none" id="modal-close">-->
+  <!--        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">-->
+  <!--          <path d="M18.293 5.293a1 1 0 0 0-1.414 0L12 10.586 7.707 6.293a1 1 0 1 0-1.414 1.414L10.586 12l-4.293 4.293a1 1 0 1 0 1.414 1.414L12 13.414l4.293 4.293a1 1 0 0 0 1.414-1.414L13.414 12l4.293-4.293a1 1 0 0 0 0-1.414z"/>-->
+  <!--        </svg>-->
+  <!--      </button>-->
+  <!--    </div>-->
+  <!--    <div class="mb-4">-->
+  <!--      <p class="text-lg font-medium justify-center" style="color:white;">写真を撮ってください。</p>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+<!--</body>-->
+
+        
+          <!--全エリア[START]-->
     <div class="flex bg-gray-100">
 
         <!--左エリア[START]--> 
@@ -42,8 +59,8 @@
        
         <!--左エリア[END]--> 
         
-      <body>
-             <form action="{{ url('peopleregister') }}" method="POST" class="w-full">
+      <!--<body>-->
+             <form action="{{ url('peopleregister') }}" method="POST" class="w-full" enctype="multipart/form-data">
                         @csrf
               
                 <br>
@@ -61,14 +78,11 @@
     <label class="block text-sm font-medium text-gray-700">生年月日</label>
     <input name="date_of_birth" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="生年月日">
   </div>
-  <!--<div class="form-group col-span-1">-->
-  <!--    <label class="block text-sm font-medium text-gray-700">年齢</label>-->
-  <!--    <input name="age" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">-->
-  <!--</div>-->
-  <div class="form-group col-span-1">
-    <label class="block text-sm font-medium text-gray-700">性別</label>
-    <input name="gender" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="性別">
-  </div>
+ <div class="form-group col-span-1">
+      <label class="block text-sm font-medium text-gray-700">プロフィール画像</label>
+      <input name="filename" id="filename" type="file" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+    </div>
+    
   <div class="form-group col-span-1">
     <label class="block text-sm font-medium text-gray-700">障害名</label>
     <input name="disability_name" type="text" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="障がい名">
@@ -81,10 +95,14 @@
     </div>
   </div>
 </div>
-
+</form>  
                 <!--    </div>-->
                 <!--</div>-->
-            </form>   
+ 
+
+
+
+
         
         
         <hr>
@@ -261,8 +279,19 @@
 
                
   
-      <script>
+ <script>
+$(document).ready(function() {
+    $('#modal-first').fadeIn();
+    setTimeout(function(){
+      $('#modal-first').fadeOut();
+    }, 4000);
+  });
 
+  // モーダルを閉じる
+  $('#modal-close').click(function() {
+    $('#modal-first').fadeOut();
+  });
+  
 async function main() {
   try {
     const video = document.querySelector("#camera-stream");
