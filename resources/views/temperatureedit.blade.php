@@ -15,9 +15,9 @@
          
       
                         @csrf
-                        {{$person->person_name}}さんのID番号
-                        <input name="people_id" value="{{$person->id}}" class="appearance-none block w-full text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="">
-                        <input type="hidden" name="id" value="{{ $person->id }}">
+                        <!--{{$person->person_name}}さんのID番号-->
+                        <!--<input name="people_id" value="{{$person->id}}" class="appearance-none block w-full text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="">-->
+                        <!--<input type="hidden" name="id" value="{{ $person->id }}">-->
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1">
                         体温
                         </label>

@@ -21,11 +21,11 @@ class TemperatureController extends Controller
     {
       // 全件データ取得して一覧表示する↓
         // $people は変数名　Person::でPersonモデルにアクセスする
-        $temperature = Temperature::all();
+        // $temperature = Temperature::all();
         // ('people')に$peopleが代入される
         
         // 'people'はpeople.blade.phpの省略↓　// compact('people')で合っている↓
-        return view('people',compact('temperature'));
+        // return view('people',compact('temperature'));
     }
 
     /**
@@ -77,10 +77,12 @@ return redirect()->route('temperature.edit', ['people_id' => $person->id]);
      * @param  \App\Models\temperature  $temperature
      * @return \Illuminate\Http\Response
      */
-    public function show(temperature $temperature)
-    {
-        //
-    }
+    public function show($id)
+{
+    $temperature = Temperature::findOrFail($id);
+
+    return view('temperatures.show', compact('temperature'));
+}
 
     /**
      * Show the form for editing the specified resource.

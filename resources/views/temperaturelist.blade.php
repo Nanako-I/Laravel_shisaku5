@@ -59,15 +59,13 @@
            <!--<section class="text-gray-600 body-font" _msthidden="29">-->
   <!--<div class="container px-5 py-24 mx-auto" _msthidden="29">-->
     <div class="flex flex-col text-center w-full mb-20" _msthidden="2">
-      <h1 class="sm:text-3xl text-6xl font-bold title-font mb-4 text-gray-900" _msttexthash="91611" _msthidden="1" _msthash="63">利用者一覧</h1>
+      <h1 class="sm:text-3xl text-6xl font-bold title-font mb-4 text-gray-900" _msttexthash="91611" _msthidden="1" _msthash="63">検温リスト</h1>
     </div>
     
     <!-- 現在の本 -->
-    @csrf
                 @if (!is_null($people) && count($people) > 0)
               <div class="flex flex-wrap justify-center -m-2" style="flex-wrap:wrap">
                 @foreach ($people as $person)
-                <!--$person->load('temperatures');-->
                   <div class="p-2 lg:w-1/3 md:w-1/2 w-full">
                     <div class="h-50 flex items-center border-gray-900 border p-4 rounded-lg bg-yellow-200">
                      @if ($person->filename)
@@ -75,40 +73,13 @@
                             @else
                               <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://dummyimage.com/80x80">
                             @endif
-                                      <div class="flex-grow">
-                                        <h2 class="text-gray-900 title-font font-bold text-3xl" _msttexthash="277030">{{$person->person_name}}</h2>
-                                        <p class="text-gray-900 font-bold text-xl" _msttexthash="150072">{{$person->date_of_birth}}生まれ</p>
-                                      </div>
-                      
-                   <!-- Load Font Awesome -->
-                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-                                        <script src="https://kit.fontawesome.com/de653d534a.js" crossorigin="anonymous"></script>
-                                        <a href="{{ url('food/'.$person->id.'/edit') }}">
-                                        <i class="fa-solid fa-bowl-rice" style="font-size: 2em; padding: 0 5px; hover:text-3xl"></i>
-                                        
-                                        <a href="{{ url('temperature/'.$person->id.'/edit') }}">
-                                        <i class="fa-solid fa-thermometer" style="font-size: 2em; padding: 0 5px;"></i>
-                                        
-                                        <a href="{{ url('toilet/'.$person->id.'/edit') }}">
-                                        <i class="fa-solid fa-toilet-paper" style="font-size: 2em; padding: 0 5px;"></i>
-                                        
-                                        <a href="{{ url('record/'.$person->id.'/edit') }}">
-                                        <i class="fa-regular fa-clipboard" style="font-size: 2em; padding: 0 5px;"></i>
-<!-- Display an icon -->
 
-                       <!-- 体温データを取得して表示 -->
-                             @if (isset($person) && isset($person->temperatures))
-                                @foreach ($person->temperatures as $temperature)
-                                    <a href="{{ route('temperatures.show', $temperature->id) }}">{{ $temperature->temperature }}</a>
-                                    @if ($person->temperatures()->where('created_at', '<', now()->subHours(6))->exists())
-                                        <p>検温してください</p>
-                                        
-                                        <p class="text-gray-900 font-bold text-xl" _msttexthash="150072">{{$temperature->temperature}}</p>
-                                    @endif
-                                @endforeach
-                                @endif
-                       
-                      <a href="{{ route('people.edit', ['id' => $person->id]) }}">
+
+                      <div class="flex-grow">
+                        <h2 class="text-gray-900 title-font font-bold text-3xl" _msttexthash="277030">{{$person->person_name}}</h2>
+                        <p class="text-gray-900 font-bold text-xl" _msttexthash="150072">{{$person->date_of_birth}}生まれ</p>
+                      </div>
+                      <a href="{{ url('temperature/'.$person->id.'/edit') }}" method="GET">
                         @csrf
                         <i class="material-icons md-90 ml-auto">add</i>
                       </a>

@@ -120,7 +120,15 @@ class PersonController extends Controller
     return redirect('people');
 }
 
-    
+//      public function templist()
+// {
+//     $people = Person::all();
+        // ('people')に$peopleが代入される
+        
+        // 'people'はpeople.blade.phpの省略↓　// compact('people')で合っている↓
+        // return view('temperaturelist',compact('people'));
+    // return view('temperaturelist');
+// }
     // return view('peopleregister');
 
         // $people = Person::create($storeData);

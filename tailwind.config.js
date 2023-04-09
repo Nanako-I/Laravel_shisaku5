@@ -13,8 +13,12 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                customOrange: '#f97316',
+            },
         },
     },
 
+    variants: {},
     plugins: [require('@tailwindcss/forms')],
 };

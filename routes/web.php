@@ -57,6 +57,11 @@ Route::middleware('auth')->group(function () {
 
 // Route::resource('temperature', TemperatureController::class);
 // Route::resource('temperature', TemperatureController::class)->parameters(['temperature' => 'temperature'])->except(['show']);
+// Route::get('temperaturelist', [PersonController::class, 'templist']);
+
+// Route::get('people', [TemperatureController::class, 'show'])->name('temperature.show');
+Route::get('temperatures/{id}', 'TemperatureController@show')->name('temperatures.show');
+
 
 Route::get('temperature/{people_id}/edit', [TemperatureController::class, 'edit'])->name('temperature.edit');
 // Route::resource('temperature/{people_id}/edit', [TemperatureController::class])->name('temperature.edit');
