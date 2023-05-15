@@ -91,6 +91,13 @@
                 </button>
         </form> 
         
+         <form action="{{ url('speech/'.$person->id.'/edit') }}" method="GET">
+            @csrf
+                <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-lg mr-4">
+                活動きろく
+                </button>
+        </form> 
+        
         <form action="{{ url('record/'.$person->id.'/edit') }}" method="GET">
             @csrf
                 <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg text-lg mr-4">

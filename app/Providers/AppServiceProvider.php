@@ -23,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-       URL::forceScheme('https');  //
-    }
+{
+    // サーバー側でGoogle Cloud Speech-to-Text APIを使用するために、Google Cloud SDKの認証情報をセットする
+    putenv('GOOGLE_APPLICATION_CREDENTIALS='.base_path().'/speech_api_key.json');
+}
 }

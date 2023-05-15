@@ -19,14 +19,13 @@ class TemperatureController extends Controller
     
     public function index()
     {
-      // 全件データ取得して一覧表示する↓
-        // $people は変数名　Person::でPersonモデルにアクセスする
-        // $temperature = Temperature::all();
+       $temperature = Temperature::all();
         // ('people')に$peopleが代入される
         
         // 'people'はpeople.blade.phpの省略↓　// compact('people')で合っている↓
-        // return view('people',compact('temperature'));
+        return view('people',compact('temperature'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +34,7 @@ class TemperatureController extends Controller
      */
      
      
-   public function create($id)
+   public function create(Request $request)
 {
     $person = Temperature::findOrFail($request->people_id);
 return redirect()->route('temperature.edit', ['people_id' => $person->id]);
@@ -96,9 +95,9 @@ return redirect()->route('temperature.edit', ['people_id' => $person->id]);
 //     return view('temperature.edit', ['id' => $person->id],compact('person'));
 // }
 
-public function edit(Request $request, $id)
+public function edit(Request $request, $people_id)
 {
-    $person = Temperature::findOrFail($id);
+    $person = Person::findOrFail($people_id);
     return view('temperatureedit', ['id' => $person->id],compact('person'));
 }
 

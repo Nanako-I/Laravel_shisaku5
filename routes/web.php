@@ -8,7 +8,14 @@ use App\Http\Controllers\PhotoController;//追記
 use App\Http\Controllers\TemperatureController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ToiletController;
+use App\Http\Controllers\SpeechController;
 use App\Http\Controllers\RecordController;
+
+use Google\Cloud\Speech\V1p1beta1\StreamingRecognitionConfig;
+use Google\Cloud\Speech\V1p1beta1\StreamingRecognizeRequest;
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,6 +82,9 @@ Route::post('food/{people_id}/edit', [FoodController::class,'store'])->name('foo
 Route::get('toilet/{people_id}/edit', [ToiletController::class, 'edit'])->name('toilet.edit');
 Route::post('toilet/{people_id}/edit', [ToiletController::class,'store'])->name('toilet.post');
 // Route::get('people/{id}/edit', [TemperatureController::class, 'index'])->name('temperatures.index');
+
+Route::get('speech/{people_id}/edit', [SpeechController::class, 'edit'])->name('speech.edit');
+Route::post('speech/{people_id}/edit', [SpeechController::class,'store'])->name('speech.post');
 
 Route::get('record/{id}/edit', [RecordController::class, 'show'])->name('record.edit');
 
